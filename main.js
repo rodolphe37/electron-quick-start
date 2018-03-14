@@ -11,9 +11,14 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
+function createWindow (options = {}) {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    x: options.x, y: options.y,
+    width: 800, height: 600,
+    backgroundColor: options.backgroundColor,
+    webPreferences: {affinity: "window"}
+  })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -37,7 +42,14 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', () => {
+  // window with white backround
+  createWindow({x: 0, y: 0, backgroundColor: "#fff"});
+  setTimeout(() => {
+    // window with yellow background
+    createWindow({x: 100, y: 100, backgroundColor: "#ff0"});
+  }, 2000)
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
