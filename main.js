@@ -1,3 +1,4 @@
+require("./global");
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
@@ -15,7 +16,7 @@ function createWindow (options = {}) {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     x: options.x, y: options.y,
-    width: 800, height: 600,
+    width: 1024, height: 800,
     backgroundColor: options.backgroundColor,
     webPreferences: {affinity: "window"}
   })
@@ -39,16 +40,31 @@ function createWindow (options = {}) {
   })
 }
 
+function getWidevineCdmPluginPath() {
+  let basePath = path.resolve(__dirname, "./node_modules/electron-widevinecdm/widevine");
+  if (global.PLATFORM_DARWIN) {
+    return path.join(basePath, "/darwin_x64/_platform_specific/mac_x64/widevinecdmadapter.plugin");
+  } else if (global.PLATFORM_WIN32 && global.ARCH_64) {
+    return path.join(basePath, "\\win32_x64\\_platform_specific\\win_x64\\widevinecdmadapter.dll");
+  } else if (global.PLATFORM_WIN32 && global.ARCH_32) {
+    return path.join(basePath, "\\win32_ia32\\_platform_specific\\win_x86\\widevinecdmadapter.dll");
+  } else if (global.PLATFORM_LINUX) {
+    return path.join(basePath, "/linux_x64/libwidevinecdmadapter.so");
+  }
+}
+
+let widevineCdmPluginPath = getWidevineCdmPluginPath();
+console.log(widevineCdmPluginPath)
+
+app.commandLine.appendSwitch("widevine-cdm-path", widevineCdmPluginPath);
+app.commandLine.appendSwitch("widevine-cdm-version", "1.4.8.970");
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   // window with white backround
   createWindow({x: 0, y: 0, backgroundColor: "#fff"});
-  setTimeout(() => {
-    // window with yellow background
-    createWindow({x: 100, y: 100, backgroundColor: "#ff0"});
-  }, 2000)
 })
 
 // Quit when all windows are closed.
