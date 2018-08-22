@@ -54,7 +54,7 @@ function getWidevineCdmPluginPath() {
 }
 
 let widevineCdmPluginPath = getWidevineCdmPluginPath();
-console.log(widevineCdmPluginPath)
+console.log(`widevine-cdm-path: ${widevineCdmPluginPath}\n`);
 
 app.commandLine.appendSwitch("widevine-cdm-path", widevineCdmPluginPath);
 app.commandLine.appendSwitch("widevine-cdm-version", "1.4.8.970");
