@@ -17,7 +17,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
-    "electron": "3.0.14",
+    "electron": "4.0.1",
     "electron-widevinecdm": "5.0.2"
   }
 }
