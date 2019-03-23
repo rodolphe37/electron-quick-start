@@ -36,15 +36,15 @@ function createWindow (options = {}) {
 }
 
 function getWidevineCdmPluginPath() {
-  let basePath = path.resolve(__dirname, "./node_modules/electron-widevinecdm/widevine");
+  let basePath = path.resolve(__dirname, "./static/WidevineCdm");
   if (global.PLATFORM_DARWIN) {
-    return path.join(basePath, "/darwin_x64/_platform_specific/mac_x64/widevinecdmadapter.plugin");
+    return path.join(basePath, "/darwin_x64/_platform_specific/mac_x64");
   } else if (global.PLATFORM_WIN32 && global.ARCH_64) {
-    return path.join(basePath, "\\win32_x64\\_platform_specific\\win_x64\\widevinecdmadapter.dll");
+    return path.join(basePath, "\\win32_x64\\_platform_specific\\win_x64");
   } else if (global.PLATFORM_WIN32 && global.ARCH_32) {
-    return path.join(basePath, "\\win32_ia32\\_platform_specific\\win_x86\\widevinecdmadapter.dll");
+    return path.join(basePath, "\\win32_ia32\\_platform_specific\\win_x86");
   } else if (global.PLATFORM_LINUX) {
-    return path.join(basePath, "/linux_x64/libwidevinecdmadapter.so");
+    return path.join(basePath, "/linux_x64");
   }
 }
 
@@ -52,7 +52,7 @@ let widevineCdmPluginPath = getWidevineCdmPluginPath();
 console.log(`widevine-cdm-path: ${widevineCdmPluginPath}\n`);
 
 app.commandLine.appendSwitch("widevine-cdm-path", widevineCdmPluginPath);
-app.commandLine.appendSwitch("widevine-cdm-version", "1.4.8.970");
+app.commandLine.appendSwitch("widevine-cdm-version", "4.10.1303.2");
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
