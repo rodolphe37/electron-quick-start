@@ -13,7 +13,11 @@ function createWindow (options = {}) {
     x: options.x, y: options.y,
     width: 1024, height: 800,
     backgroundColor: options.backgroundColor,
-    webPreferences: {affinity: "window"}
+    webPreferences: {
+      affinity: "window",
+      nodeIntegration: true,
+      webviewTag: true
+    }
   })
 
   // and load the index.html of the app.
