@@ -14,6 +14,14 @@
     }
   </style>
   <body>
-    <webview plugins src="https://shaka-player-demo.appspot.com/demo/#asset=https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest.mpd;lang=en-GB;build=uncompiled"/>
+    <webview src="https://www.google.com/"/>
   </body>
+  <script>
+    setTimeout(() => {
+      let webview = document.getElementsByTagName("webview")[0];
+      console.time("setWebviewSrc");
+      webview.setAttribute("src", "https://github.com/");
+      console.timeEnd("setWebviewSrc");
+    }, 2000);
+  </script>
 </html>
